@@ -12,6 +12,6 @@ npm run dev
 ### Technologies
 - [React](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
-- [Chakra Ui](**https://chakra-ui.com/**)
+- [Chakra Ui](https://chakra-ui.com/)
 - [Nookies](https://github.com/maticzav/nookies)
 - [React Hooks Form](https://react-hook-form.com/)
