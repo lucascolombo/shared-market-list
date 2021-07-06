@@ -55,7 +55,7 @@ const ToDoList: FC = () => {
     useEffect(() => {
         const { '_MY_MARKETLIST_':myList } = parseCookies()
 
-        setItems(JSON.parse(myList))
+        myList !== undefined && setItems(JSON.parse(myList))
     }, [])
 
     return (
