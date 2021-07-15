@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react'
-import { List, Input } from '@chakra-ui/react'
+import { List, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { setCookie, parseCookies } from 'nookies'
 
@@ -12,13 +12,15 @@ const ToDoList: FC = () => {
     const { register, handleSubmit, reset, setFocus } = useForm()
 
     const handleAddItem = ( data: ItemListType ): void =>  {
-        const newItem = {
-            value: data.item,
-            checked: false,
-        }   
+        if (data.item !== '') {
+            const newItem = {
+                value: data.item,
+                checked: false,
+            }   
 
-        updateList([ ...[ newItem ], ...items ])
-        reset({ item: '' })
+            updateList([ ...[ newItem ], ...items ])
+            reset({ item: '' })
+        }
     }
 
     const handleChangeCheckItem = ( itemId: number, checked: boolean ): void => {
@@ -62,19 +64,34 @@ const ToDoList: FC = () => {
         <List w="100%">
             <ListRow>
                 <form onSubmit={handleSubmit(handleAddItem)}>
-                    <Input 
-                        {...register('item')}
-                        placeholder="...Add new item" 
-                        name="item"
-                        size="md" 
-                        border="0" 
-                        outline="none"
-                        fontFamily="handwriting"
-                        fontSize="2xl"
-                        autoComplete="off"
-                        height="48px"
-                        borderRadius="unset"
-                        focusBorderColor="gray.600" />
+                    <InputGroup>
+                        <Input 
+                            {...register('item')}
+                            placeholder="...Add new item" 
+                            name="item"
+                            size="md" 
+                            border="0" 
+                            outline="none"
+                            fontFamily="handwriting"
+                            fontSize="2xl"
+                            autoComplete="off"
+                            height="48px"
+                            borderRadius="unset"
+                            focusBorderColor="gray.600" />
+
+                        <InputRightElement
+                            height="48px"
+                            paddingRight={2}>
+                            <Button 
+                                variant="ghost" 
+                                type="submit" 
+                                fontFamily="handwriting"
+                                colorScheme="gray.600"
+                                _hover={{ bg: "#e8e8e8" }}>
+                                {`>`}
+                            </Button>
+                        </InputRightElement>
+                    </InputGroup>
                 </form>
             </ListRow>
 
