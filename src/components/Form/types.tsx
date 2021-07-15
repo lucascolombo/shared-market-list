@@ -1,5 +1,7 @@
-import { ItemListType } from '../ToDoList/types'
-
 export interface FormType {
-    onSubmitItem: (data: ItemListType) => void,
+    onSubmitItem: (item: string) => void,
+}
+
+export interface DataItemType {
+    item: string
 }

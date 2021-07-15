@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react'
 import { List } from '@chakra-ui/react'
 import { setCookie, parseCookies } from 'nookies'
 
-import { ItemListType, ItemType } from './types'
+import { ItemType } from './types'
 import ListRow from './ListRow'
 import ListItem from './ListItem'
 import Form from '../Form'
@@ -10,15 +10,13 @@ import Form from '../Form'
 const ToDoList: FC = () => {
     const [items, setItems] = useState<ItemType[]>([])
 
-    const handleAddItem = ( data: ItemListType ): void =>  {
-        if (data.item !== '') {
-            const newItem = {
-                value: data.item,
-                checked: false,
-            }   
+    const handleAddItem = ( item: string ): void =>  {
+        const newItem = {
+            value: item,
+            checked: false,
+        }   
 
-            updateList([ ...[ newItem ], ...items ])
-        }
+        updateList([ ...[ newItem ], ...items ])
     }
 
     const handleChangeCheckItem = ( itemId: number, checked: boolean ): void => {

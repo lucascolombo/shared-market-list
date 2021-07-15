@@ -2,15 +2,18 @@ import { FC, useEffect } from 'react'
 import { Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
-import { FormType } from './types'
-import { ItemListType } from '../ToDoList/types'
+import { FormType, DataItemType } from './types'
 
 const Form: FC<FormType> = ({ onSubmitItem }) => {
     const { register, handleSubmit, setFocus, reset } = useForm()
 
-    const onHandleSubmit = (data: ItemListType): void => {
-        onSubmitItem(data)
-        reset({ item: '' })
+    const onHandleSubmit = (data: DataItemType): void => {
+        const { item } = data
+
+        if (item !== '') {
+            onSubmitItem(item)
+            reset({ item: '' })
+        }
     }
 
     useEffect(() => {

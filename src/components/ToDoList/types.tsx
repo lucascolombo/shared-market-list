@@ -3,10 +3,6 @@ export interface ItemType {
     checked: boolean
 }
 
-export interface ItemListType {
-    item: string
-}
-
 export interface ListItemType {
     checked: boolean
     idItem: number
