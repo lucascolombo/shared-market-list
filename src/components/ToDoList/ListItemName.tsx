@@ -9,6 +9,7 @@ const ListItemName: FC<ListItemNameType> = ({ children, checked }) => {
             as="span"
             color={ checked ? 'gray.500' : 'black' }
             textDecoration={ checked ? 'line-through' : 'none' }
+            textTransform="capitalize"
             > 
             {children}
         </Text>

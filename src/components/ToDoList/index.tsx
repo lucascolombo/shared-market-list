@@ -1,15 +1,14 @@
 import { FC, useState, useEffect } from 'react'
-import { List, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
+import { List } from '@chakra-ui/react'
 import { setCookie, parseCookies } from 'nookies'
 
 import { ItemListType, ItemType } from './types'
 import ListRow from './ListRow'
 import ListItem from './ListItem'
+import Form from '../Form'
 
 const ToDoList: FC = () => {
     const [items, setItems] = useState<ItemType[]>([])
-    const { register, handleSubmit, reset, setFocus } = useForm()
 
     const handleAddItem = ( data: ItemListType ): void =>  {
         if (data.item !== '') {
@@ -19,7 +18,6 @@ const ToDoList: FC = () => {
             }   
 
             updateList([ ...[ newItem ], ...items ])
-            reset({ item: '' })
         }
     }
 
@@ -51,10 +49,6 @@ const ToDoList: FC = () => {
     }
 
     useEffect(() => {
-        setFocus("item")
-    }, [setFocus])
-
-    useEffect(() => {
         const { '_MY_MARKETLIST_':myList } = parseCookies()
 
         myList !== undefined && setItems(JSON.parse(myList))
@@ -63,36 +57,7 @@ const ToDoList: FC = () => {
     return (
         <List w="100%">
             <ListRow>
-                <form onSubmit={handleSubmit(handleAddItem)}>
-                    <InputGroup>
-                        <Input 
-                            {...register('item')}
-                            placeholder="...Add new item" 
-                            name="item"
-                            size="md" 
-                            border="0" 
-                            outline="none"
-                            fontFamily="handwriting"
-                            fontSize="2xl"
-                            autoComplete="off"
-                            height="48px"
-                            borderRadius="unset"
-                            focusBorderColor="gray.600" />
-
-                        <InputRightElement
-                            height="48px"
-                            paddingRight={2}>
-                            <Button 
-                                variant="ghost" 
-                                type="submit" 
-                                fontFamily="handwriting"
-                                colorScheme="gray.600"
-                                _hover={{ bg: "#e8e8e8" }}>
-                                {`>`}
-                            </Button>
-                        </InputRightElement>
-                    </InputGroup>
-                </form>
+                <Form onSubmitItem={handleAddItem} />
             </ListRow>
 
             {items.map((item, i) =>
